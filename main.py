@@ -11,10 +11,12 @@ ssh= paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect(hostname= HOST, username= ID, pkey=key)
 
-stdin, stdout, stderr = ssh.exec_command('echo "hello"')
+stdin, stdout, stderr = ssh.exec_command('binwalk')
+
 stdin.close()
 
 for line in stdout.read().splitlines():
     print(line.decode())
-
+for line in stderr.read().splitlines():
+    print(line.decode())
 ssh.close()
